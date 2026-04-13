@@ -1,19 +1,21 @@
 import type { Metadata } from 'next'
-import { Kalam, Patrick_Hand } from 'next/font/google'
+import localFont from 'next/font/local'
 import './globals.css'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
-const kalam = Kalam({
-  subsets: ['latin'],
+const kalam = localFont({
+  src: './fonts/Kalam-Bold.woff2',
   weight: '700',
   variable: '--font-kalam',
+  display: 'swap',
 })
 
-const patrickHand = Patrick_Hand({
-  subsets: ['latin'],
+const patrickHand = localFont({
+  src: './fonts/PatrickHand-Regular.woff2',
   weight: '400',
   variable: '--font-patrick-hand',
+  display: 'swap',
 })
 
 export const metadata: Metadata = {

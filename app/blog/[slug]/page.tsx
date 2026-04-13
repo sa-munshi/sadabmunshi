@@ -21,7 +21,7 @@ export default async function BlogPost({
 }: {
   params: Promise<{ slug: string }>
 }) {
-  const { slug } = await params
+  void (await params)
 
   return (
     <div className="py-12 max-w-2xl mx-auto text-center">
