@@ -1,101 +1,166 @@
-import Image from "next/image";
+'use client'
+
+import Link from 'next/link'
+import SketchButton from '@/components/ui/SketchButton'
+import SketchCard from '@/components/ui/SketchCard'
+
+const moods = [
+  'Today feels like a good day to break something and fix it.',
+  'Currently resisting the urge to rebuild everything from scratch.',
+  'Some days I code. Some days I stare at the screen. Today is one of those days.',
+  'Learning that good enough is better than perfect. Slowly.',
+  'Coffee level: critical. Curiosity level: high.',
+]
+
+const blogPreviews = [
+  {
+    title: 'Spend Less Time Counting, More Time Living',
+    date: '2026-03-22',
+    excerpt:
+      'Why I built a personal finance app that uses AI to handle the boring parts of tracking money.',
+    slug: 'spend-less-time-counting',
+  },
+  {
+    title: 'What I Think About AI',
+    date: '2026-02-23',
+    excerpt:
+      'Artificial intelligence explained humanistically. A simple, honest take on what AI actually is.',
+    slug: 'what-i-think-about-ai',
+  },
+  {
+    title: 'Why I Started Making Things',
+    date: '2025-12-15',
+    excerpt: 'On curiosity, starting small, and creating for yourself.',
+    slug: 'why-i-started-building-things',
+  },
+]
+
+const rotations = ['rotate-1', '-rotate-2', 'rotate-1']
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const today = new Date().toLocaleDateString('en-US', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  })
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const mood = moods[Math.floor(Math.random() * moods.length)]
+
+  return (
+    <>
+      {/* Hero */}
+      <section className="relative py-16 md:py-24">
+        <p className="font-body text-muted uppercase tracking-wider text-sm">
+          {today}
+        </p>
+
+        <h1 className="font-heading text-5xl md:text-7xl font-bold text-pencil mt-4 leading-tight">
+          I learn by
+          <br />
+          building things
+          <span style={{ display: 'inline-block', transform: 'rotate(15deg)' }}>!</span>
+        </h1>
+
+        <p className="font-body text-xl text-pencil/70 mt-4">
+          Student. Indie developer. Building small tools from a small village.
+        </p>
+
+        <div className="flex gap-4 mt-8">
+          <SketchButton href="/projects">See my work →</SketchButton>
+          <SketchButton variant="secondary" href="/blog">
+            Read the blog →
+          </SketchButton>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+
+        {/* Hand-drawn arrow (desktop only) */}
+        <div className="hidden md:block mt-8">
+          <svg
+            width="60"
+            height="80"
+            viewBox="0 0 60 80"
+            fill="none"
+            className="text-pencil"
+            aria-hidden="true"
+          >
+            <path
+              d="M30 5 C20 20, 40 35, 25 55 C20 63, 22 68, 30 75"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              fill="none"
+            />
+            <path
+              d="M22 68 L30 77 L35 65"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              fill="none"
+            />
+          </svg>
+        </div>
+
+        {/* Decorative bouncing circle (desktop only) */}
+        <div
+          className="hidden md:block absolute right-4 top-24 w-16 h-16 border-2 border-pencil bg-sketch/20 animate-bounce3d"
+          style={{
+            borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px',
+          }}
+          aria-hidden="true"
+        />
+      </section>
+
+      {/* Random mood note */}
+      <div
+        className="my-12 border-2 border-dashed border-muted p-4 font-body italic text-pencil/60"
+        style={{
+          borderRadius: '255px 15px 225px 15px / 15px 225px 15px 255px',
+        }}
+      >
+        {mood}
+      </div>
+
+      {/* Blog preview */}
+      <section className="my-16">
+        <h2 className="font-heading text-3xl">Recent Writing</h2>
+
+        <div className="grid md:grid-cols-3 gap-6 mt-6">
+          {blogPreviews.map((post, i) => (
+            <SketchCard
+              key={post.slug}
+              decoration="tape"
+              rotate={rotations[i]}
+            >
+              <Link href={`/blog/${post.slug}`} className="block">
+                <h3 className="font-heading text-xl">{post.title}</h3>
+                <time className="text-sm text-muted uppercase">{post.date}</time>
+                <p className="font-body mt-2">{post.excerpt}</p>
+              </Link>
+            </SketchCard>
+          ))}
+        </div>
+
+        <Link
+          href="/blog"
+          className="inline-block font-body text-ink hover:underline mt-4"
+          style={{ textDecorationStyle: 'wavy' }}
         >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          View all posts →
+        </Link>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="my-16">
+        <SketchCard variant="postit" className="text-center py-8">
+          <p className="font-heading text-2xl">
+            Got something interesting? Say hello.
+          </p>
+          <SketchButton href="/contact" className="mt-4">
+            Write to me →
+          </SketchButton>
+        </SketchCard>
+      </section>
+    </>
+  )
 }

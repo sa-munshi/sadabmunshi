@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Kalam', 'cursive'],
-        body: ['Patrick Hand', 'cursive'],
+        heading: ['var(--font-kalam)', 'cursive'],
+        body: ['var(--font-patrick-hand)', 'cursive'],
       },
       colors: {
         paper: '#fdfbf7',
